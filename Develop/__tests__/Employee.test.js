@@ -10,3 +10,11 @@ test('creates an Employee obejct', () => {
     expect(employee.id).toBe(1);
     expect(employee.email).toBe('');
 });
+
+test('sets the employee object name to user input', () => {
+    const employee = new Employee();
+
+    empName=employee.getName()
+
+    .then(expect(empName).toBe(expect.any(String)));
+});

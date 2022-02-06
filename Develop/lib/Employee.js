@@ -9,28 +9,12 @@ class Employee {
     }
 
     getName() {
-        inquirer.prompt({
-            type: 'text',
-            name: 'name',
-            message: "What is the person's name?",
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    console.log('Please enter their name');
-                    return false;
-                }
-            }
-        })
-        .then(({name}) => {
-            //this.name=name;
-            return name;
-        })
+        
     }
 
-    // getId() {
+    getId() {
         
-    // }
+    }
     // getEmail() {
 
     // }

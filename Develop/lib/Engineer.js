@@ -5,7 +5,7 @@ class Engineer extends Employee {
         //call parent constructor here
         super();
 
-        this.github = this.getGithub();
+        this.github = '';
     }
 
     getGithub() {
@@ -15,6 +15,6 @@ class Engineer extends Employee {
     getRole() {
 
     }
-
-
 };
+
+module.exports = Engineer;

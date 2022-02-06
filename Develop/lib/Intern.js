@@ -1,11 +1,11 @@
 const Employee = require('./Employee');
 
 class Intern extends Employee {
-    constructor(name = '') {
+    constructor() {
         //call parent constructor here
-        super(name);
+        super();
 
-        this.school = this.getSchool();
+        this.school = '';
     }
 
     getSchool() {
@@ -13,6 +13,8 @@ class Intern extends Employee {
     }
 
     getRole() {
-        
+
     }
 };
+
+module.exports = Intern

@@ -1,3 +1,3 @@
-const Employee = require('./lib/Employee');
+const Input = require('./Input');
 
-new Employee.getName();
+new Input().initApp();
