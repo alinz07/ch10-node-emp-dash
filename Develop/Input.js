@@ -28,7 +28,7 @@ Input.prototype.addEmployee = function() {
 };
 
 Input.prototype.roleCheck = function () {
-    inquirer.prompt(
+    return inquirer.prompt(
         {
             type: 'checkbox',
             name: 'role',
@@ -45,15 +45,11 @@ Input.prototype.roleCheck = function () {
             }
         } 
     )
-    .then((roleCheckData) => {
-        this.oneEmp.push(roleCheckData.role);
-        this.roleType=roleCheckData.role;
-    })
 };
 
 Input.prototype.mgrQs = function () {
 
-    inquirer.prompt([
+    return inquirer.prompt([
         {
             type: 'text',
             name: 'name',
@@ -82,10 +78,6 @@ Input.prototype.mgrQs = function () {
             }
         }
     ])
-    .then((answers) => {
-        this.oneEmp.push(answers);
-        console.log(this.oneEmp);
-    });
 }    
 
 Input.prototype.internQs = function() {
@@ -130,88 +122,99 @@ Input.prototype.engineerQs = function() {
 
 Input.prototype.sharedQuestions = function() {
 
-    this.roleCheck();
+    console.log('shared qs running');
 
-    switch(this.roleType) {
-        case 'Engineer':
-            this.engineerQs();
-        case 'Intern':
-            this.internQs();
-        default: console.log('Manager specific questions already answered, moving to shared questions');
-    }
-
-    inquirer.prompt([
-        {
-            type: 'number',
-            name: 'empId',
-            message: "Please enter the Employee's ID number",
-            validate: nameInput => {
-                //could be updated to include local length of phone # if diff than 10
-                if (typeof nameInput=='number') {
-                    return true;
-                } else {
-                    console.log("Please enter the Employee's ID number");
-                    return false;
-                }
+    this.roleCheck()
+        .then((roleCheckData) => {
+            this.oneEmp.push(roleCheckData.role[0]);
+            this.roleType=roleCheckData.role[0];
+        })
+        .then(() => {
+            switch(this.roleType) {
+                case 'Engineer':
+                    this.engineerQs();
+                case 'Intern':
+                    this.internQs();
+                default: console.log('Manager specific questions already answered, moving to shared questions');
             }
-        },
-        {
-            type: 'text',
-            name: 'email',
-            message: "Please enter the employee's email",
-            validate: emailInput => {
-                //could be updated to include local length of phone # if diff than 10
-                if (emailInput.includes('@')) {
-                    return true;
-                } else {
-                    console.log("Please enter a valid email address");
-                    return false;
-                }
-            }
-        }
-    ])
-    .then((answers) => {
-        this.oneEmp.push(answers);
-
-        console.log(this.oneEmp);
-
-        if (!this.role=='Manager') {
+        })
+        .then(() => {
             inquirer.prompt([
                 {
-                    type: 'text',
-                    name: 'name',
-                    message: "Please enter the Employee's name",
+                    type: 'number',
+                    name: 'empId',
+                    message: "Please enter the Employee's ID number",
                     validate: nameInput => {
-                        if (nameInput) {
+                        //could be updated to include local length of phone # if diff than 10
+                        if (typeof nameInput=='number') {
                             return true;
                         } else {
-                            console.log("Please enter the Employee's name");
+                            console.log("Please enter the Employee's ID number");
                             return false;
                         }
                     }
-                } 
+                },
+                {
+                    type: 'text',
+                    name: 'email',
+                    message: "Please enter the employee's email",
+                    validate: emailInput => {
+                        //could be updated to include local length of phone # if diff than 10
+                        if (emailInput.includes('@')) {
+                            return true;
+                        } else {
+                            console.log("Please enter a valid email address");
+                            return false;
+                        }
+                    }
+                }
             ])
-            .then((nameAnswer) => {
-                this.oneEmp.push(nameAnswer);
-                console.log(this.oneEmp);
+            .then((answers) => {
+                    this.oneEmp.push(answers);
+                    console.log(this.oneEmp);
             })
-        }        
-    })
-    .then(this.addEmployee())
-    .then((addEmpConfirm) => {
-        if (addEmpConfirm) {
-            this.sharedQuestions();
-        }
-        else {
-            //pass this.infoArray into a page to generate html with template literal
-            return
-        }
-    });
+        });
+        
+    //         if (!this.role=='Manager') {
+    //             inquirer.prompt([
+    //                 {
+    //                     type: 'text',
+    //                     name: 'name',
+    //                     message: "Please enter the Employee's name",
+    //                     validate: nameInput => {
+    //                         if (nameInput) {
+    //                             return true;
+    //                         } else {
+    //                             console.log("Please enter the Employee's name");
+    //                             return false;
+    //                         }
+    //                     }
+    //                 } 
+    //             ])
+    //             .then((nameAnswer) => {
+    //                 this.oneEmp.push(nameAnswer);
+    //                 console.log(this.oneEmp);
+    //             })
+    //         }        
+    //     })
+    //     .then(this.addEmployee())
+    //     .then((addEmpConfirm) => {
+    //         if (addEmpConfirm) {
+    //             this.sharedQuestions();
+    //         }
+    //         else {
+    //             //pass this.infoArray into a page to generate html with template literal
+    //             return
+    //         }
+    //     });
 }
 
 Input.prototype.initApp = function() {
     this.mgrQs()
-    .then(sharedQuestions());
+        .then((mgrInfo) => {
+            this.oneEmp.push(mgrInfo);
+            this.sharedQuestions();
+        });
 };
 
 module.exports = Input;
