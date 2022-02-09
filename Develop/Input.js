@@ -60,23 +60,7 @@ Input.prototype.mgrQs = function () {
 }    
 
 Input.prototype.internQs = function() {
-    inquirer.prompt({
-        type: 'text',
-        name: 'school',
-        message: 'Which school does the person attend?',
-        validate: schoolInput => {
-            //could be updated to include local length of phone # if diff than 10
-            if (schoolInput) {
-                return true;
-            } else {
-                console.log("Please enter the Employee's role");
-                return false;
-            }
-        }
-    })
-    .then((internAns) => {
-        oneEmp.push(internAns);
-    })
+    
 }
 
 Input.prototype.sharedQuestions = function() {
@@ -114,16 +98,21 @@ Input.prototype.initApp = function() {
         if (this.roleType === 'Engineer') {
             this.employee = new Engineer();
             this.employee.getGithub()
-            .then((github) => {
-                this.employee.github = github;
+            .then((githubAns) => {
+                this.employee.github = githubAns.github;
                 this.sharedQuestions()
             });
         } else if (this.roleType === 'Intern') {
-            console.log('this shouldnt be running');
+            this.employee = new Intern();
+            this.employee.getSchool()
+            .then((schoolAns) => {
+                this.employee.school = schoolAns.school;
+                this.sharedQuestions()
+            });
         } else if (this.roleType === 'Manager') {
             console.log('this shouldnt be running');
         } else {
-            console.log("this code should be unreachable");
+            console.log("this code should be unreachable, starting over");
             this.initApp();
         }
     })
