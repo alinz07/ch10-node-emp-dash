@@ -3,8 +3,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
-
-
+const generatePage = require("./src/page-template.js");
 
 function Input() {
     this.roleType;
@@ -35,14 +34,13 @@ Input.prototype.sharedQuestions = function() {
             .then((emailAns) => {
                 this.employee.email = emailAns.email;
                 this.employees.push(this.employee);
-                console.log(this.employees);
                 this.addEmployee()
                 .then((addEmpConfirm) => {
                     if (addEmpConfirm.confirmAdd) {
                         this.initApp();
                     }
                     else {
-                        console.log('It worked');
+                        generatePage(this.employees);
                     }
                 })   
             })
