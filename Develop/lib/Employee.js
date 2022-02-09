@@ -68,7 +68,7 @@ class Employee {
             {
                 type: 'checkbox',
                 name: 'role',
-                message: "please enter the employee's role (first iteration should be Manager)",
+                message: "Please enter the employee's role (The first role entered should be the Manager)",
                 choices: ['Manager', 'Engineer', 'Intern'],
                 validate: nameInput => {
                     //could be updated to include local length of phone # if diff than 10

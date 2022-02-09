@@ -40,6 +40,16 @@ test('sets the Manager email to user input', () => {
     }));
 });
 
+test('sets the Manager officeNumber property to user input', () => {
+    const manager = new Manager();
+
+    const offNum = manager.getOfficeNumber();
+
+    return expect(offNum).resolves.toEqual(expect.objectContaining({
+        officeNum: expect.any(Number)
+    }));
+});
+
 test('sets the Manager role to user selection', () => {
     const manager = new Manager();
 

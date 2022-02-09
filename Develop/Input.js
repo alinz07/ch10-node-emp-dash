@@ -1,14 +1,12 @@
+const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
-const Employee = require('./lib/Employee');
+
 
 
 function Input() {
-    this.count = 0;
-    this.oneEmp=[];
-    this.sharedArray=[];
     this.roleType;
     this.employee;
     this.employees=[];
@@ -26,43 +24,6 @@ Input.prototype.addEmployee = function() {
     )
 };
 
-Input.prototype.mgrQs = function () {
-
-    return inquirer.prompt([
-        {
-            type: 'text',
-            name: 'name',
-            message: "Please enter the Team Manager's name",
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    console.log("Please enter the Manager's name");
-                    return false;
-                }
-            }
-        },
-        {
-            type: 'number',
-            name: 'officeNum',
-            message: "Please enter the Team Manager's 10-digit phone number with no spaces/dashes",
-            validate: numInput => {
-                //could be updated to include local length of phone # if diff than 10
-                if (numInput.toString().length==10 && typeof numInput=='number') {
-                    return true;
-                } else {
-                    console.log("Please re-enter the 10-digit phone number");
-                    return false;
-                }
-            }
-        }
-    ])
-}    
-
-Input.prototype.internQs = function() {
-    
-}
-
 Input.prototype.sharedQuestions = function() {
     this.employee.getName()
     .then((nameAns) => {
@@ -73,22 +34,21 @@ Input.prototype.sharedQuestions = function() {
             this.employee.getEmail()
             .then((emailAns) => {
                 this.employee.email = emailAns.email;
-                console.log(this.employee);
                 this.employees.push(this.employee);
+                console.log(this.employees);
                 this.addEmployee()
                 .then((addEmpConfirm) => {
                     if (addEmpConfirm.confirmAdd) {
                         this.initApp();
                     }
                     else {
-                        console.log('Engineer works');
+                        console.log('It worked');
                     }
                 })   
             })
         })
     })
 }
-
 
 Input.prototype.initApp = function() {
     this.employee = new Employee();
@@ -110,7 +70,12 @@ Input.prototype.initApp = function() {
                 this.sharedQuestions()
             });
         } else if (this.roleType === 'Manager') {
-            console.log('this shouldnt be running');
+            this.employee = new Manager();
+            this.employee.getOfficeNumber()
+            .then((offNumAns) => {
+                this.employee.officeNumber = offNumAns.officeNum;
+                this.sharedQuestions()
+            });
         } else {
             console.log("this code should be unreachable, starting over");
             this.initApp();
