@@ -4,6 +4,8 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const generatePage = require("./src/page-template.js");
+const { writeFile, copyFile } = require('./utils/generate-site');
+var writeTheFile = '';
 
 function Input() {
     this.roleType;
@@ -38,11 +40,17 @@ Input.prototype.sharedQuestions = function() {
                 .then((addEmpConfirm) => {
                     if (addEmpConfirm.confirmAdd) {
                         this.initApp();
+                        writeTheFile = false;
                     }
                     else {
-                        generatePage(this.employees);
+                        writeTheFile = true;
+                        return generatePage(this.employees)
                     }
-                })   
+                })
+                .then((pageHTML) => {
+                    if (writeTheFile)
+                    writeFile(pageHTML);
+                })
             })
         })
     })
