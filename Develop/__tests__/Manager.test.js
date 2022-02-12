@@ -1,8 +1,9 @@
 const Manager = require('../lib/Manager');
 
 test('creates an Manager obejct', () => {
-    const manager = new Manager();
+    const manager = new Manager('jobtitle');
 
+    expect(manager.role == 'jobtitle');
     expect(manager).toHaveProperty('name');
     expect(manager).toHaveProperty('id');
     expect(manager).toHaveProperty('email');

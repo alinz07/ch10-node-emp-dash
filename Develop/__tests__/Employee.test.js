@@ -4,8 +4,9 @@ const Employee = require('../lib/Employee');
 //jest.mock('../lib/Potion');
 
 test('creates an Employee obejct', () => {
-    const employee = new Employee();
+    const employee = new Employee('jobtitle');
 
+    expect(employee.role == 'jobtitle');
     expect(employee).toHaveProperty('name');
     expect(employee).toHaveProperty('id');
     expect(employee).toHaveProperty('email');

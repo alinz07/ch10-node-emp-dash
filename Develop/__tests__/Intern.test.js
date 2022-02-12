@@ -1,8 +1,9 @@
 const Intern = require('../lib/Intern');
 
 test('creates an Intern obejct', () => {
-    const intern = new Intern();
+    const intern = new Intern('jobtitle');
 
+    expect(intern.role == 'jobtitle');
     expect(intern).toHaveProperty('name');
     expect(intern).toHaveProperty('id');
     expect(intern).toHaveProperty('email');

@@ -4,28 +4,30 @@ const generateCards = EmployeeArrayTemplateData => {
     return `
     <container id="card-container">    
         ${EmployeeArrayTemplateData.map((employee) => {
-            const {name, id, email, ...unique} = employee;
-            const {uniqueInfo, uniqueValue} = unique;
+            const {role, name, id, email, ...unique} = employee;
+            console.log(unique);
             return `
-            <div id="top-of-card">
+            <section id="card">
+                <div id="top-of-card">
+                    <h2>${name}</h2>
+                    <h3>${role}</h3>
+                </div>
+                <div id="info-list">
+                    <ul>
+                        <li>
+                            Id: ${id}
+                        </li>
 
-                <h2>${name}</h2>
-                <h3>${this}</h3>
+                        <li>
+                            Email: ${email}
+                        </li>
 
-                <ul>
-                    <li>
-                        Id: ${id}
-                    </li>
-
-                    <li>
-                        Email: ${email}
-                    </li>
-
-                    <li>
-                        ${uniqueInfo}: ${uniqueValue}
-                    </li>
-                </ul>
-            </div>
+                        <li>
+                            ${(Object.keys(unique))[0]}: ${(Object.values(unique))[0]}
+                        </li>
+                    </ul>
+                </div>
+            </section>
             `;
         })
         .join('')}

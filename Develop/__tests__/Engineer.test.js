@@ -1,8 +1,9 @@
 const Engineer = require('../lib/Engineer');
 
 test('creates an Engineer obejct', () => {
-    const engineer = new Engineer();
+    const engineer = new Engineer('jobtitle');
 
+    expect(engineer.role == 'jobtitle');
     expect(engineer).toHaveProperty('name');
     expect(engineer).toHaveProperty('id');
     expect(engineer).toHaveProperty('email');

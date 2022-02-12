@@ -8,7 +8,6 @@ const { writeFile, copyFile } = require('./utils/generate-site');
 var writeTheFile = '';
 
 function Input() {
-    this.roleType;
     this.employee;
     this.employees=[];
 };
@@ -36,6 +35,7 @@ Input.prototype.sharedQuestions = function() {
             .then((emailAns) => {
                 this.employee.email = emailAns.email;
                 this.employees.push(this.employee);
+                console.log(this.employees);
                 this.addEmployee()
                 .then((addEmpConfirm) => {
                     if (addEmpConfirm.confirmAdd) {
@@ -57,26 +57,28 @@ Input.prototype.sharedQuestions = function() {
 }
 
 Input.prototype.initApp = function() {
-    this.employee = new Employee();
+    this.employee = new Employee('');
     this.employee.getRole()
     .then((answer) => {
-        this.roleType = answer.role[0];
-        if (this.roleType === 'Engineer') {
-            this.employee = new Engineer();
+        this.employee.role = answer.role[0];
+        let role = this.employee.role;
+        if (role === 'Engineer') {
+            this.employee = new Engineer(role);
+            console.log(this.employee);
             this.employee.getGithub()
             .then((githubAns) => {
                 this.employee.github = githubAns.github;
                 this.sharedQuestions()
             });
-        } else if (this.roleType === 'Intern') {
-            this.employee = new Intern();
+        } else if (role === 'Intern') {
+            this.employee = new Intern(role);
             this.employee.getSchool()
             .then((schoolAns) => {
                 this.employee.school = schoolAns.school;
                 this.sharedQuestions()
             });
-        } else if (this.roleType === 'Manager') {
-            this.employee = new Manager();
+        } else if (role === 'Manager') {
+            this.employee = new Manager(role);
             this.employee.getOfficeNumber()
             .then((offNumAns) => {
                 this.employee.officeNumber = offNumAns.officeNum;
