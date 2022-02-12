@@ -1,19 +1,42 @@
 //if I need function to help create the template literal. There will have to be a for loop somewhere, but I might be able to do that in the
 //function that we export before I start making the template. We'll see.
+const generateCards = EmployeeArrayTemplateData => {
+    return `
+    <container id="card-container">    
+        ${EmployeeArrayTemplateData.map((employee) => {
+            const {name, id, email, ...unique} = employee;
+            const {uniqueInfo, uniqueValue} = unique;
+            return `
+            <div id="top-of-card">
 
+                <h2>${name}</h2>
+                <h3>${this}</h3>
+
+                <ul>
+                    <li>
+                        Id: ${id}
+                    </li>
+
+                    <li>
+                        Email: ${email}
+                    </li>
+
+                    <li>
+                        ${uniqueInfo}: ${uniqueValue}
+                    </li>
+                </ul>
+            </div>
+            `;
+        })
+        .join('')}
+    </container>
+    `
+};
 
 
 module.exports = EmployeeArrayTemplateData => {
     console.log(EmployeeArrayTemplateData);
-    EmployeeArrayTemplateData.forEach(employee => {
-        //have to use spread operator ... because unique is not
-        //the name of the property of the object and I don't
-        //want to have to use conditionals for each unique property
-        //I'll find a way to get the info from the object wehn
-        //using it in the template literal.
-        const {name, id, email, ...unique} = employee;
-        console.log(name, id, email, unique);
-    });
+    
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -29,8 +52,12 @@ module.exports = EmployeeArrayTemplateData => {
     </head>
 
     <body>
+        
+        <header>
+            <h1>My Team</h1>
+        </header>
 
-        <p> Let's make sure this is working </p>
+        ${generateCards(EmployeeArrayTemplateData)}
 
     </body>
 
