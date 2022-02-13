@@ -1,0 +1,19 @@
+header {
+    height: 100px;
+}
+
+header > h1 {
+    margin-top: 25px;
+    margin-left: 43%
+}
+
+#card {
+    padding: 0;
+}
+
+@media screen and (max-width: 557px) {
+    header > h1 {
+        margin-top: 25px;
+        margin-left: 30px;
+    }
+}

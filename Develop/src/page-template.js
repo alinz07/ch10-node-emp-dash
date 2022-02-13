@@ -1,33 +1,43 @@
 const generateCards = EmployeeArrayTemplateData => {
     return `
-    <container id="card-container">    
+    <container id="card-container" class="row justify-content-center flex-wrap">    
         ${EmployeeArrayTemplateData.map((employee) => {
             const {role, name, id, email, ...unique} = employee;
             console.log(unique);
+
             if (Object.keys(unique)[0] == 'github') {
                 githubName = Object.values(unique)[0];
                 theHref = "https://github.com/" + githubName;
-                listItem = `${(Object.keys(unique))[0]}: <a href="${theHref}">${(Object.values(unique))[0]}</a>`;
+                listItem = `${(Object.keys(unique))[0]}: <a href="${theHref}" target="_blank">${(Object.values(unique))[0]}</a>`;
             } else {
                 listItem = `${(Object.keys(unique))[0]}: ${(Object.values(unique))[0]}`;
             }
+
+            if (role == 'Engineer') {
+                icon = `<i class="fa-solid fa-glasses"></i>`;
+            } else if (role == 'Manager') {
+                icon = `<i class="fa-solid fa-mug-hot"></i>`;
+            } else if (role == 'Intern') {
+                icon = `<i class="fa-solid fa-graduation-cap"></i>`;
+            }
+            
             return `
-            <section id="card">
-                <div id="top-of-card">
-                    <h2>${name}</h2>
-                    <h3>${role}</h3>
+            <section id="card" class="col-sm-5 col-lg-3 card m-2 shadow mr-4 bg-body rounded">
+                <div class="card-header bg-primary">
+                    <h3 class="text-light">${name}</h2>
+                    <h4 class="text-light"><span> ${icon} </span> ${role}</h3>
                 </div>
                 <div id="info-list">
-                    <ul>
-                        <li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
                             Id: ${id}
                         </li>
 
-                        <li>
+                        <li class="list-group-item">
                             <a href="mailto:${email}">Email: ${email}</a>
                         </li>
 
-                        <li>
+                        <li class="list-group-item">
                             ${listItem}
                         </li>
                     </ul>
@@ -52,20 +62,20 @@ module.exports = EmployeeArrayTemplateData => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="../src/style.css">
         <title>Portfolio Demo</title>
     </head>
 
     <body>
-        
-        <header>
-            <h1>My Team</h1>
+        <header class="bg-danger position-relative">
+            <h1 class="text-light position-absolute">My Team</h1>
         </header>
-
-        ${generateCards(EmployeeArrayTemplateData)}
+        <section class="container">
+            ${generateCards(EmployeeArrayTemplateData)}
+        </section>
 
     </body>
 

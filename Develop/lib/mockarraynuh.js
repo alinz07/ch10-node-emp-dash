@@ -23,7 +23,19 @@ const createMockArray = function() {
     c.email='Charlie@gmail.com';
     c.school='Madison';
 
-    mockArray.push(a,b,c);
+    const d = new Intern('Intern');
+    d.name = 'Santa';
+    d.id=987;
+    d.email='Santa@gmail.com';
+    d.school='Harvard';
+
+    const e = new Intern('Intern');
+    e.name = 'Nick';
+    e.id=654;
+    e.email='Nick@gmail.com';
+    e.school='Milwaukee';
+
+    mockArray.push(a,b,c,d,e);
     return mockArray;
 }
 
