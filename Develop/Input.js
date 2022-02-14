@@ -60,45 +60,44 @@ Input.prototype.sharedQuestions = function() {
 Input.prototype.initApp = function() {
 
     //these lines are mock to save prompt time
-    const macarena = createMockArray();
-    writeFile(generatePage(macarena));
-}
- 
-    //end of mock
+//     const macarena = createMockArray();
+//     writeFile(generatePage(macarena));
+// }
 
-//     this.employee = new Employee('');
-//     this.employee.getRole()
-//     .then((answer) => {
-//         this.employee.role = answer.role[0];
-//         let role = this.employee.role;
-//         if (role === 'Engineer') {
-//             this.employee = new Engineer(role);
-//             console.log(this.employee);
-//             this.employee.getGithub()
-//             .then((githubAns) => {
-//                 this.employee.github = githubAns.github;
-//                 this.sharedQuestions()
-//             });
-//         } else if (role === 'Intern') {
-//             this.employee = new Intern(role);
-//             this.employee.getSchool()
-//             .then((schoolAns) => {
-//                 this.employee.school = schoolAns.school;
-//                 this.sharedQuestions()
-//             });
-//         } else if (role === 'Manager') {
-//             this.employee = new Manager(role);
-//             this.employee.getOfficeNumber()
-//             .then((offNumAns) => {
-//                 this.employee.officeNumber = offNumAns.officeNum;
-//                 this.sharedQuestions()
-//             });
-//         } else {
-//             console.log("this code should be unreachable, starting over");
-//             this.initApp();
-//         }
-//     })
-// };
+ 
+    this.employee = new Employee('');
+    this.employee.getRole()
+    .then((answer) => {
+        this.employee.role = answer.role[0];
+        let role = this.employee.role;
+        if (role === 'Engineer') {
+            this.employee = new Engineer(role);
+            console.log(this.employee);
+            this.employee.getGithub()
+            .then((githubAns) => {
+                this.employee.github = githubAns.github;
+                this.sharedQuestions()
+            });
+        } else if (role === 'Intern') {
+            this.employee = new Intern(role);
+            this.employee.getSchool()
+            .then((schoolAns) => {
+                this.employee.school = schoolAns.school;
+                this.sharedQuestions()
+            });
+        } else if (role === 'Manager') {
+            this.employee = new Manager(role);
+            this.employee.getOfficeNumber()
+            .then((offNumAns) => {
+                this.employee.officeNumber = offNumAns.officeNum;
+                this.sharedQuestions()
+            });
+        } else {
+            console.log("this code should be unreachable, starting over");
+            this.initApp();
+        }
+    })
+};
 
 module.exports = Input;
 

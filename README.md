@@ -4,7 +4,7 @@
 leave a comment about tests requiring input and only 5 seconds to answer.
 
 
-## **Link** to video walkthrough to demonstrate app functionality: 
+## **Link** to video walkthrough to demonstrate app functionality: https://drive.google.com/file/d/1g35sQWTip0CyGE0N5PG32CVwBRcClzM_/view?usp=sharing 
 ## **Link** to project repository: https://github.com/alinz07/ch10-node-emp-dash 
 <br/>
 
@@ -50,7 +50,7 @@ asynchronous functions, but .then() can only be used when returning a promise, l
 I'm proud of the flow of execution of the app using promises and their returns. The input object looks clean and is easy to understand. I'm also proud of the short css file, and that I was able to take advantage of bootstrap.
 <br/>
 
-## **Challenge Critera**
+## **Challenge Criteria**
 AS A manager
 I WANT to generate a webpage that displays my team's basic info
 SO THAT I have quick access to their emails and GitHub profiles
@@ -84,7 +84,7 @@ THEN I exit the application, and the HTML is generated
 <br/>
 
 ## **Screenshot of Web Application**
-![gif-of-webapp](./Develop/mockup/challenge-10.gif)
+![png-of-webapp](./Develop/src/screenshot.png)
 The example HTML dashboard file that is created with this app can be found in the Develop/dist folder and is named index.html
 <br/>
 
