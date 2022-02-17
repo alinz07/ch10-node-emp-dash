@@ -1,9 +1,6 @@
 # Node Employee Dashboard
 <br/>
 
-leave a comment about tests requiring input and only 5 seconds to answer.
-
-
 ## **Link** to video walkthrough to demonstrate app functionality: https://drive.google.com/file/d/1g35sQWTip0CyGE0N5PG32CVwBRcClzM_/view?usp=sharing 
 ## **Link** to project repository: https://github.com/alinz07/ch10-node-emp-dash 
 <br/>
